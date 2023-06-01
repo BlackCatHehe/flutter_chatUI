@@ -66,8 +66,7 @@ class ChatList extends StatefulWidget {
 }
 
 /// [ChatList] widget state.
-class _ChatListState extends State<ChatList>
-    with SingleTickerProviderStateMixin {
+class _ChatListState extends State<ChatList> with SingleTickerProviderStateMixin {
   late final Animation<double> _animation = CurvedAnimation(
     curve: Curves.easeOutQuad,
     parent: _controller,
@@ -76,8 +75,7 @@ class _ChatListState extends State<ChatList>
   late final AnimationController _controller = AnimationController(vsync: this);
 
   bool _isNextPageLoading = false;
-  final GlobalKey<PatchedSliverAnimatedListState> _listKey =
-      GlobalKey<PatchedSliverAnimatedListState>();
+  final GlobalKey<PatchedSliverAnimatedListState> _listKey = GlobalKey<PatchedSliverAnimatedListState>();
   late List<Object> _oldData = List.from(widget.items);
 
   @override
@@ -101,16 +99,13 @@ class _ChatListState extends State<ChatList>
   }
 
   @override
-  Widget build(BuildContext context) =>
-      NotificationListener<ScrollNotification>(
+  Widget build(BuildContext context) => NotificationListener<ScrollNotification>(
         onNotification: (notification) {
           if (widget.onEndReached == null || widget.isLastPage == true) {
             return false;
           }
 
-          if (notification.metrics.pixels >=
-              (notification.metrics.maxScrollExtent *
-                  (widget.onEndReachedThreshold ?? 0.75))) {
+          if (notification.metrics.pixels >= (notification.metrics.maxScrollExtent * (widget.onEndReachedThreshold ?? 0.75))) {
             if (widget.items.isEmpty || _isNextPageLoading) return false;
 
             _controller.duration = Duration.zero;
@@ -138,8 +133,7 @@ class _ChatListState extends State<ChatList>
           physics: widget.scrollPhysics,
           reverse: true,
           slivers: [
-            if (widget.bottomWidget != null)
-              SliverToBoxAdapter(child: widget.bottomWidget),
+            if (widget.bottomWidget != null) SliverToBoxAdapter(child: widget.bottomWidget),
             SliverPadding(
               padding: const EdgeInsets.only(bottom: 4),
               sliver: PatchedSliverAnimatedList(
@@ -156,16 +150,12 @@ class _ChatListState extends State<ChatList>
                 },
                 initialItemCount: widget.items.length,
                 key: _listKey,
-                itemBuilder: (_, index, animation) =>
-                    _newMessageBuilder(index, animation),
+                itemBuilder: (_, index, animation) => _newMessageBuilder(index, animation),
               ),
             ),
             SliverPadding(
               padding: EdgeInsets.only(
-                top: 16 +
-                    (widget.useTopSafeAreaInset
-                        ? MediaQuery.of(context).padding.top
-                        : 0),
+                top: 16 + (widget.useTopSafeAreaInset ? MediaQuery.of(context).padding.top : 0),
               ),
               sliver: SliverToBoxAdapter(
                 child: SizeTransition(
@@ -184,9 +174,7 @@ class _ChatListState extends State<ChatList>
                                 backgroundColor: Colors.transparent,
                                 strokeWidth: 1.5,
                                 valueColor: AlwaysStoppedAnimation<Color>(
-                                  InheritedChatTheme.of(context)
-                                      .theme
-                                      .primaryColor,
+                                  InheritedChatTheme.of(context).theme.primaryColor,
                                 ),
                               )
                             : null,
@@ -253,8 +241,7 @@ class _ChatListState extends State<ChatList>
     }
   }
 
-  Widget _removedMessageBuilder(Object item, Animation<double> animation) =>
-      SizeTransition(
+  Widget _removedMessageBuilder(Object item, Animation<double> animation) => SizeTransition(
         key: _valueKeyForItem(item),
         axisAlignment: -1,
         sizeFactor: animation.drive(CurveTween(curve: Curves.easeInQuad)),
@@ -298,8 +285,7 @@ class _ChatListState extends State<ChatList>
     }
   }
 
-  Key? _valueKeyForItem(Object item) =>
-      _mapMessage(item, (message) => ValueKey(message.id));
+  Key? _valueKeyForItem(Object item) => _mapMessage(item, (message) => ValueKey(message.id));
 
   T? _mapMessage<T>(Object maybeMessage, T Function(types.Message) f) {
     if (maybeMessage is Map<String, Object>) {

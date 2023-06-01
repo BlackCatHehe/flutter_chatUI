@@ -210,12 +210,12 @@ class Message extends StatelessWidget {
               : Alignment.centerLeft,
       margin: bubbleRtlAlignment == BubbleRtlAlignment.left
           ? EdgeInsetsDirectional.only(
-              bottom: 4,
+              bottom: 0,
               end: isMobile ? query.padding.right : 0,
               start: 0 + (isMobile ? query.padding.left : 0),
             )
           : EdgeInsets.only(
-              bottom: 4,
+              bottom: 0,
               left: 0 + (isMobile ? query.padding.left : 0),
               right: isMobile ? query.padding.right : 0,
             ),
