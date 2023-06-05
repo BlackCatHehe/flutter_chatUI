@@ -132,6 +132,7 @@ class _ChatListState extends State<ChatList> with SingleTickerProviderStateMixin
           keyboardDismissBehavior: widget.keyboardDismissBehavior,
           physics: widget.scrollPhysics,
           reverse: true,
+          shrinkWrap: widget.items.length < 14,
           slivers: [
             if (widget.bottomWidget != null) SliverToBoxAdapter(child: widget.bottomWidget),
             SliverPadding(
