@@ -381,9 +381,15 @@ class ChatState extends State<Chat> {
   }
 
   /// Scroll to the message with the specified [id].
-  void scrollToMessage(String id, {Duration? duration}) => _scrollController.scrollToIndex(
+  void scrollToMessage(
+    String id, {
+    Duration? duration,
+    AutoScrollPosition? preferPosition,
+  }) =>
+      _scrollController.scrollToIndex(
         _autoScrollIndexById[id]!,
         duration: duration ?? scrollAnimationDuration,
+        preferPosition: preferPosition,
       );
 
   @override
